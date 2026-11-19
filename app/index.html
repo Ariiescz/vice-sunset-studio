@@ -26,11 +26,18 @@
 </div>
 </div>
 <div class="group">
+<div class="group-label">Story Preset</div>
+<button class="preset-btn" data-preset="heist">🌇 Sunset Heist</button>
+<button class="preset-btn" data-preset="neon">🌃 Neon Party</button>
+<button class="preset-btn" data-preset="getaway">🚗 Getaway</button>
+</div>
+<div class="group">
 <div class="group-label">Layout</div>
 <button class="layout-btn" data-layout="trio">Trio</button>
 <button class="layout-btn" data-layout="duo">Duo</button>
 <button class="layout-btn" data-layout="solo">Solo</button>
 <button class="layout-btn" data-layout="quad">Quad</button>
+<button class="layout-btn" data-layout="story">Story (3-act)</button>
 </div>
 <div class="group">
 <div class="group-label">Grade</div>
@@ -38,16 +45,38 @@
 <button class="grade-btn" data-grade="neon">Neon</button>
 <button class="grade-btn" data-grade="golden">Golden Hour</button>
 <button class="grade-btn" data-grade="noir">Noir</button>
+<button class="grade-btn" data-grade="comic">Comic Ink</button>
 </div>
 <div class="group">
 <div class="group-label">Caption</div>
 <input id="titleInput" value="SUNSET HEIST" maxlength="24">
 <input id="subtitleInput" value="VICE CITY • 2026" maxlength="40">
+<input id="taglineInput" placeholder="Tagline — e.g. ONE LAST JOB" maxlength="32">
+<input id="starringInput" placeholder="Starring — e.g. Lucia &amp; Jason" maxlength="40">
+</div>
+<div class="group">
+<div class="group-label">Story</div>
+<input id="storyInput" placeholder="Story caption — e.g. It started with a sunset…" maxlength="80">
+<input id="bubbleInput" placeholder="Speech bubble — e.g. Run!" maxlength="40">
+<button id="letterboxToggle">Letterbox: Off</button>
+<button id="shuffleBtn">🎲 Surprise me</button>
 </div>
 <div class="group">
 <div class="group-label">Crop</div>
 <input type="range" id="zoomSlider" min="1" max="3" step="0.05" value="1">
 <button id="fitFillToggle">Fit / Fill</button>
+</div>
+<div class="group">
+<div class="group-label">Stickers</div>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="palm"> Palm</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="flamingo"> Flamingo</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="sunglasses"> Shades</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="money"> Money bag</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="police"> Police lights</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="car"> Getaway car</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="sun"> Sun</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="cocktail"> Cocktail</label>
+<label class="sticker-label"><input type="checkbox" class="sticker-toggle" data-sticker="sign"> Neon sign</label>
 </div>
 <div class="group">
 <div class="group-label">Export PNG</div>

@@ -1,6 +1,6 @@
 [
-  {"name": "1-cover.jpg", "query": "?shot=cover&photo=pier&caption=Sunset%20Heist&layout=trio&grade=sunset&size=wide", "w": 1280, "h": 720},
-  {"name": "2-editor.jpg", "query": "?shot=editor&photo=boulevard&caption=Boulevard%20Queen&layout=duo&grade=neon", "w": 1280, "h": 720},
-  {"name": "3-cover-square.jpg", "query": "?shot=cover&photo=boulevard&caption=Boulevard%20Queen&layout=quad&grade=golden&size=square", "w": 1080, "h": 1080},
-  {"name": "4-cover-portrait.jpg", "query": "?shot=cover&photo=pier&caption=Neon%20Nights&layout=solo&grade=neon&size=portrait", "w": 1024, "h": 1280}
+  {"name": "1-cover.jpg", "query": "?shot=cover&photo=pier&caption=SUNSET%20HEIST&preset=heist&layout=story&story=It%20started%20with%20a%20sunset...&bubble=Run!&size=wide", "w": 1280, "h": 720},
+  {"name": "2-editor.jpg", "query": "?shot=editor&photo=boulevard&caption=NEON%20NIGHTS&preset=neon&layout=quad", "w": 1280, "h": 720},
+  {"name": "3-cover-square.jpg", "query": "?shot=cover&photo=boulevard&caption=BOULEVARD%20QUEEN&preset=neon&layout=story&story=The%20city%20never%20sleeps.&size=square", "w": 1080, "h": 1080},
+  {"name": "4-cover-portrait.jpg", "query": "?shot=cover&photo=pier&caption=GETAWAY&preset=getaway&layout=duo&letterbox=1&size=portrait", "w": 1024, "h": 1280}
 ]

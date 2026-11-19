@@ -3,6 +3,8 @@
 // so a headless browser can capture a clean still. Only active when the URL carries a
 // 'shot' parameter; a normal visit is left untouched.
 
+import { applyPreset } from './cover.js';
+
 const EXPORT_SIZES = {
   wide: [1920, 1080],
   square: [1080, 1080],
@@ -34,21 +36,50 @@ export function stageShot(api) {
   const layout = param(query, 'layout', DEFAULTS.layout);
   const grade = param(query, 'grade', DEFAULTS.grade);
   const size = param(query, 'size', DEFAULTS.size);
+  const preset = param(query, 'preset', '');
+  const titleStyle = param(query, 'titleStyle', '');
+  const tagline = param(query, 'tagline', '');
+  const starring = param(query, 'starring', '');
+  const story = param(query, 'story', '');
+  const bubble = param(query, 'bubble', '');
+  const letterbox = param(query, 'letterbox', '0');
+  const stickers = param(query, 'stickers', '');
 
   return (async function () {
     await api.loadSample(photo);
 
-    api.setScene({
+    let scene = {
       layout: layout,
       grade: grade,
       title: caption,
       subtitle: subtitle
-    });
+    };
+    if (preset) scene = applyPreset(scene, preset);
+    if (query.has('layout')) scene.layout = layout;
+    if (query.has('grade')) scene.grade = grade;
+    if (titleStyle) scene.titleStyle = titleStyle;
+    if (tagline) scene.tagline = tagline;
+    if (starring) scene.starring = starring;
+    if (story) scene.story = story;
+    if (bubble) scene.bubble = bubble;
+    if (letterbox === '1') scene.letterbox = true;
+    if (stickers) {
+      try {
+        const parsed = JSON.parse(stickers);
+        if (Array.isArray(parsed)) scene.stickers = parsed;
+      } catch (err) { /* ignore malformed stickers */ }
+    }
+
+    api.setScene(scene);
 
     const titleInput = document.getElementById('titleInput');
     if (titleInput) titleInput.value = caption;
     const subtitleInput = document.getElementById('subtitleInput');
     if (subtitleInput) subtitleInput.value = subtitle;
+    const taglineInput = document.getElementById('taglineInput');
+    if (taglineInput) taglineInput.value = scene.tagline || '';
+    const starringInput = document.getElementById('starringInput');
+    if (starringInput) starringInput.value = scene.starring || '';
 
     if (shot === 'cover') {
       document.body.classList.add('shot-cover');

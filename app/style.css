@@ -194,3 +194,52 @@ border-radius: 0;
 box-shadow: none;
 background: #000;
 }
+.preset-btn,
+#shuffleBtn {
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 8px;
+padding: 9px 10px;
+cursor: pointer;
+width: 100%;
+box-sizing: border-box;
+}
+.preset-btn {
+background: #22222e;
+font-size: 15px;
+font-weight: 700;
+padding: 13px 12px;
+}
+.preset-btn.active,
+#letterboxToggle.active {
+border-color: var(--accent);
+background: #2b1530;
+}
+.group:has(> .sticker-label) {
+display: flex;
+flex-wrap: wrap;
+gap: 6px;
+}
+.sticker-label {
+display: flex;
+align-items: center;
+gap: 6px;
+flex: 0 0 calc(50% - 3px);
+box-sizing: border-box;
+color: var(--muted);
+font-size: 12px;
+}
+#shuffleBtn {
+background: #ff7e1f;
+color: #1a1a1a;
+font-weight: 700;
+}
+#taglineInput, #starringInput, #storyInput, #bubbleInput {
+width: 100%;
+box-sizing: border-box;
+background: #101018;
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 8px;
+padding: 9px 10px;
+}

@@ -1,4 +1,4 @@
-import { renderCover, LAYOUTS } from './cover.js';
+import { renderCover, LAYOUTS, applyPreset, STORY_PRESETS } from './cover.js';
 import { stageShot } from './shots.js';
 
 const state = {
@@ -8,7 +8,21 @@ const state = {
   title: 'SUNSET HEIST',
   subtitle: 'VICE CITY \u2022 2026',
   zoom: 1,
-  fitFill: 'fill'
+  fitFill: 'fill',
+  preset: '', titleStyle: '', tagline: '', starring: '', story: '', bubble: '',
+  stickers: [], letterbox: false
+};
+
+const STICKER_SPOTS = {
+  palm: { x: 0.08, y: 0.14, size: 0.13 },
+  flamingo: { x: 0.9, y: 0.2, size: 0.11 },
+  sunglasses: { x: 0.5, y: 0.1, size: 0.1 },
+  money: { x: 0.85, y: 0.6, size: 0.11 },
+  police: { x: 0.12, y: 0.62, size: 0.12 },
+  car: { x: 0.8, y: 0.62, size: 0.14 },
+  sun: { x: 0.88, y: 0.1, size: 0.11 },
+  cocktail: { x: 0.12, y: 0.3, size: 0.1 },
+  sign: { x: 0.5, y: 0.06, size: 0.12 }
 };
 
 const PREVIEW_W = 960;
@@ -21,7 +35,14 @@ function getScene() {
     layout: state.layout,
     grade: state.grade,
     title: state.title,
-    subtitle: state.subtitle
+    subtitle: state.subtitle,
+    titleStyle: state.titleStyle,
+    tagline: state.tagline,
+    starring: state.starring,
+    story: state.story,
+    bubble: state.bubble,
+    stickers: state.stickers,
+    letterbox: state.letterbox
   };
 }
 
@@ -52,6 +73,45 @@ function syncControls() {
   if (titleInput && titleInput.value !== state.title) titleInput.value = state.title;
   const subtitleInput = document.getElementById('subtitleInput');
   if (subtitleInput && subtitleInput.value !== state.subtitle) subtitleInput.value = state.subtitle;
+  document.querySelectorAll('.preset-btn').forEach(function (btn) {
+    btn.classList.toggle('active', btn.dataset.preset === state.preset);
+  });
+  const taglineInput = document.getElementById('taglineInput');
+  if (taglineInput && taglineInput.value !== state.tagline) taglineInput.value = state.tagline;
+  const starringInput = document.getElementById('starringInput');
+  if (starringInput && starringInput.value !== state.starring) starringInput.value = state.starring;
+  const letterboxToggle = document.getElementById('letterboxToggle');
+  if (letterboxToggle) letterboxToggle.classList.toggle('active', state.letterbox);
+  document.querySelectorAll('.sticker-toggle').forEach(function (btn) {
+    btn.checked = state.stickers.some(function (s) { return s && s.kind === btn.dataset.sticker; });
+  });
+}
+
+function applyStoryPreset(key) {
+  if (!STORY_PRESETS[key]) return;
+  const next = applyPreset(getScene(), key);
+  next.preset = key;
+  setScene(next);
+}
+
+function shuffleStory() {
+  const keys = Object.keys(STORY_PRESETS);
+  const captions = ['SUNSET HEIST', 'NEON NIGHTS', 'OCEAN DRIVE', 'MIDNIGHT RUN', 'PALM DREAMS', 'VICE CITY'];
+  const key = keys[Math.floor(Math.random() * keys.length)];
+  applyStoryPreset(key);
+  state.title = captions[Math.floor(Math.random() * captions.length)];
+  render();
+}
+
+function toggleSticker(kind, on) {
+  if (on) {
+    const spot = STICKER_SPOTS[kind];
+    const has = state.stickers.some(function (s) { return s && s.kind === kind; });
+    if (spot && !has) state.stickers.push({ kind: kind, x: spot.x, y: spot.y, size: spot.size });
+  } else {
+    state.stickers = state.stickers.filter(function (s) { return !s || s.kind !== kind; });
+  }
+  render();
 }
 
 function render() {
@@ -286,6 +346,27 @@ function init() {
       render();
     });
   }
+
+  document.querySelectorAll('.preset-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyStoryPreset(btn.dataset.preset); });
+  });
+
+  [['taglineInput', 'tagline'], ['starringInput', 'starring'], ['storyInput', 'story'], ['bubbleInput', 'bubble']].forEach(function (pair) {
+    const el = document.getElementById(pair[0]);
+    if (el) el.addEventListener('input', function () { state[pair[1]] = el.value; render(); });
+  });
+
+  const letterboxToggle = document.getElementById('letterboxToggle');
+  if (letterboxToggle) {
+    letterboxToggle.addEventListener('click', function () { state.letterbox = !state.letterbox; render(); });
+  }
+
+  document.querySelectorAll('.sticker-toggle').forEach(function (btn) {
+    btn.addEventListener('change', function () { toggleSticker(btn.dataset.sticker, btn.checked); });
+  });
+
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  if (shuffleBtn) shuffleBtn.addEventListener('click', function () { shuffleStory(); });
 
   const zoomSlider = document.getElementById('zoomSlider');
   if (zoomSlider) {
