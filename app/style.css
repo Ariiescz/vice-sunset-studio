@@ -1,0 +1,196 @@
+:root {
+--bg: #0d0d12;
+--panel: #17171f;
+--ink: #f5f5f7;
+--muted: #9a9aad;
+--accent: #ff2e88;
+--accent2: #ff7a18;
+--line: #262633;
+}
+
+body {
+margin: 0;
+background: var(--bg);
+color: var(--ink);
+font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+header {
+padding: 18px 24px 8px;
+border-bottom: 1px solid var(--line);
+}
+
+header h1 {
+margin: 0;
+font-size: 26px;
+letter-spacing: 2px;
+background: linear-gradient(90deg, #ff7a18, #ff2e88);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+
+.tagline {
+color: var(--muted);
+margin: 6px 0 0;
+}
+
+main {
+display: flex;
+gap: 20px;
+padding: 20px 24px;
+align-items: flex-start;
+}
+
+.stage {
+flex: 1;
+min-width: 0;
+}
+
+#preview {
+width: 100%;
+height: auto;
+display: block;
+background: #000;
+border: 1px solid var(--line);
+border-radius: 10px;
+box-shadow: 0 12px 40px rgba(0, 0, 0, .55);
+}
+
+.hint {
+color: var(--muted);
+font-size: 13px;
+}
+
+.panel {
+width: 300px;
+flex: none;
+background: var(--panel);
+border: 1px solid var(--line);
+border-radius: 12px;
+padding: 16px;
+display: flex;
+flex-direction: column;
+gap: 18px;
+}
+
+.group {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.group-label {
+color: var(--muted);
+font-size: 11px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+}
+
+.layout-btn,
+.grade-btn {
+background: #22222e;
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 8px;
+padding: 9px 10px;
+cursor: pointer;
+width: 100%;
+box-sizing: border-box;
+}
+
+.layout-btn.active,
+.grade-btn.active {
+border-color: var(--accent);
+background: #2b1530;
+}
+
+.sample {
+background: #22222e;
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 8px;
+padding: 9px 10px;
+cursor: pointer;
+width: 100%;
+box-sizing: border-box;
+}
+
+#sampleStrip {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+#exportSquare,
+#exportPortrait,
+#exportWide {
+background: linear-gradient(90deg, #ff7a18, #ff2e88);
+color: #fff;
+border: none;
+font-weight: 700;
+border-radius: 8px;
+padding: 9px 10px;
+cursor: pointer;
+width: 100%;
+box-sizing: border-box;
+}
+
+#fitFillToggle {
+background: #22222e;
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 8px;
+padding: 9px 10px;
+cursor: pointer;
+width: 100%;
+box-sizing: border-box;
+}
+
+#downloadLink {
+color: var(--accent2);
+font-size: 13px;
+}
+
+input {
+width: 100%;
+box-sizing: border-box;
+background: #101018;
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 8px;
+padding: 9px 10px;
+}
+
+@media (max-width: 900px) {
+main {
+flex-direction: column;
+}
+.panel {
+width: auto;
+}
+}
+
+body.shot-cover header,
+body.shot-cover .panel,
+body.shot-cover .hint {
+display: none;
+}
+
+body.shot-cover main {
+padding: 0;
+}
+
+body.shot-cover .stage {
+width: 100%;
+}
+
+body.shot-cover #preview {
+width: 100vw;
+height: 100vh;
+object-fit: contain;
+border: none;
+border-radius: 0;
+box-shadow: none;
+background: #000;
+}
